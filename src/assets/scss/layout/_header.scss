@@ -42,16 +42,6 @@
     position: relative;
     margin-top: 3.5rem;
 
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: calc(-3.5rem - 1px);
-      left: calc(50% - #{_size(border-width) * 1});
-      width: _size(border-width);
-      height: calc(3.5rem + 1px);
-      background: _palette(border);
-    }
   }
 
   > :first-child {
@@ -77,10 +67,6 @@
   }
 
   .content {
-    border-style: solid;
-    border-color: _palette(border);
-    border-top-width: _size(border-width);
-    border-bottom-width: _size(border-width);
     max-width: 100%;
 
     .inner {
