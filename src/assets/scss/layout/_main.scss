@@ -6,6 +6,13 @@
 
 /* Main */
 
+	.row {
+		@include vendor('display', 'flex');
+		> div {
+			padding: 0 1em;
+		}
+	}
+
 	#main {
 		@include vendor('flex-grow', '1');
 		@include vendor('flex-shrink', '1');
@@ -31,6 +38,10 @@
 			background-color: transparentize(_palette(bg), 0.15);
 			border-radius: _size(border-radius);
 			opacity: 0;
+
+			&.wide {
+				width: 85%;
+			}
 
 			&.timeout {
 				display: none;
@@ -106,6 +117,10 @@
 		@include breakpoint(xsmall) {
 			article {
 				@include padding(2rem, 1.5rem, (1rem, 0, 0.5rem, 0));
+			}
+
+			.row {
+				flex-wrap: wrap;
 			}
 		}
 	}
