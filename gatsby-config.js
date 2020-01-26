@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Starter - Dimension V2',
-    author: 'Hunter Chang',
-    description: 'A Gatsby.js V2 Starter based on Dimension by HTML5 UP',
+    title: 'Karpack.us',
+    author: 'Kyle & Kristin Karpack',
+    description: 'The professional home page for Kyle and Kristin Karpack',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
