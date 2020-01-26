@@ -4,6 +4,33 @@ import kyle from '../images/kyle.jpg'
 import kristin from '../images/kristin.jpg'
 
 class Main extends React.Component {
+
+	constructor() {
+		super();
+		this.state = {};
+	}
+
+	encode(data) {
+		return Object.keys(data)
+			.map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+			.join("&");
+	}
+
+	handleSubmit = (e) => {
+		e.preventDefault();
+		const form = e.target,
+			data = this.encode({
+				"form-name": form.getAttribute("name"),
+				...this.state
+			});
+
+		fetch("/", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: data
+		}).then(() => this.setState({ submitted: true })).catch(error => alert(error));
+	}
+
 	render() {
 		let close = (
 			<div
@@ -12,7 +39,7 @@ class Main extends React.Component {
 					this.props.onCloseArticle()
 				}}
 			></div>
-		)
+		);
 
 		return (
 			<div
@@ -64,18 +91,19 @@ class Main extends React.Component {
 					style={{ display: 'none' }}
 				>
 					<h2 className="major">Contact</h2>
-					<form method="post" action="#">
+					<form name="contact" method="POST" data-netlify data-netlify-honeypot="bot-field" 
+						onSubmit={this.handleSubmit} hidden={this.state.submitted}>
 						<div className="field half first">
 							<label htmlFor="name">Name</label>
-							<input type="text" name="name" id="name" />
+							<input type="text" name="name" id="name" onChange={this.handleChange} />
 						</div>
 						<div className="field half">
 							<label htmlFor="email">Email</label>
-							<input type="text" name="email" id="email" />
+							<input type="text" name="email" id="email" required onChange={this.handleChange} />
 						</div>
 						<div className="field">
 							<label htmlFor="message">Message</label>
-							<textarea name="message" id="message" rows="4"></textarea>
+							<textarea name="message" id="message" rows="4" required onChange={this.handleChange}></textarea>
 						</div>
 						<ul className="actions">
 							<li>
@@ -86,6 +114,10 @@ class Main extends React.Component {
 							</li>
 						</ul>
 					</form>
+
+					<p hidden={!this.state.submitted}>
+						Thank you for your submission. We will get back to you shortly.
+					</p>
 
 					<h3>Contact Kyle</h3>
 					<ul className="icons">
