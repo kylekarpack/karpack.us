@@ -16,6 +16,10 @@ class Main extends React.Component {
 			.join("&");
 	}
 
+	handleChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const form = e.target,
