@@ -16,8 +16,7 @@
   height: 100vh;
   z-index: 1;
 
-  &:before,
-  &:after {
+  &:before {
     content: '';
     display: block;
     position: absolute;
@@ -45,7 +44,7 @@
     z-index: 2;
   }
 
-  &:after {
+  #main-bg {
     @include vendor('transform', 'scale(1.125)');
     @include vendor(
       'transition',
@@ -54,15 +53,11 @@
         'filter #{_duration(article)} ease-in-out'
       )
     );
-    background-image: url('../../images/bg.jpg');
-    background-position: 90% 40%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: 1;
+    height: 100%;
   }
 
   .body.is-article-visible & {
-    &:after {
+    #main-bg {
       @include vendor('transform', 'scale(1.0825)');
       // @include vendor('filter', 'blur(0.2rem)');
     }
