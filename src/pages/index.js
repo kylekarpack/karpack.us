@@ -1,115 +1,114 @@
-import React from 'react'
-import Layout from '../components/layout'
+import React, { useState, useEffect, useRef } from "react";
+import Layout from "../components/layout";
 
-import Header from '../components/Header'
-import Main from '../components/Main'
-import Footer from '../components/Footer'
+import Header from "../components/Header";
+import Main from "../components/Main";
+import Footer from "../components/Footer";
+import BackgroundImage from "gatsby-background-image";
 
-class IndexPage extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isArticleVisible: false,
-      timeout: false,
-      articleTimeout: false,
-      article: '',
-      loading: 'is-loading'
-    }
-    this.handleOpenArticle = this.handleOpenArticle.bind(this)
-    this.handleCloseArticle = this.handleCloseArticle.bind(this)
-    this.setWrapperRef = this.setWrapperRef.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-  }
+let wrapperRef;
 
-  componentDidMount () {
-    this.timeoutId = setTimeout(() => {
-        this.setState({loading: ''});
-    }, 100);
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
+const initialState = {
+  isArticleVisible: false,
+  timeout: false,
+  articleTimeout: false,
+  article: "",
+  loading: false,
+};
 
-  componentWillUnmount () {
-    if (this.timeoutId) {
-        clearTimeout(this.timeoutId);
-    }
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
+function IndexPage(props) {
+	const [state, setState] = useState(initialState);
 
-  setWrapperRef(node) {
-    this.wrapperRef = node;
-  }
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
 
-  handleOpenArticle(article) {
+  const setWrapperRef = node => {
+    wrapperRef = node;
+  };
 
-    this.setState({
-      isArticleVisible: !this.state.isArticleVisible,
-      article
-    })
+  const handleOpenArticle = article => {
+    setState(stateRef => ({
+      ...stateRef,
+      isArticleVisible: true,
+      article,
+    }));
 
     setTimeout(() => {
-      this.setState({
-        timeout: !this.state.timeout
-      })
-    }, 325)
+      setState(stateRef => ({
+        ...stateRef,
+        timeout: !stateRef.timeout,
+      }));
+    }, 325);
 
     setTimeout(() => {
-      this.setState({
-        articleTimeout: !this.state.articleTimeout
-      })
-    }, 350)
+      setState(stateRef => ({
+        ...stateRef,
+        articleTimeout: !stateRef.articleTimeout,
+      }));
+    }, 350);
+  };
 
-  }
-
-  handleCloseArticle() {
-
-    this.setState({
-      articleTimeout: !this.state.articleTimeout
-    })
-
-    setTimeout(() => {
-      this.setState({
-        timeout: !this.state.timeout
-      })
-    }, 325)
+  const handleCloseArticle = () => {
+    setState(stateRef => ({
+      ...stateRef,
+      articleTimeout: !stateRef.articleTimeout,
+    }));
 
     setTimeout(() => {
-      this.setState({
-        isArticleVisible: !this.state.isArticleVisible,
-        article: ''
-      })
-    }, 350)
+      setState(stateRef => ({
+        ...stateRef,
+        timeout: !stateRef.timeout,
+      }));
+    }, 325);
 
-  }
+    setTimeout(() => {
+      setState(stateRef => ({
+        ...stateRef,
+        isArticleVisible: !stateRef.isArticleVisible,
+        article: "",
+      }));
+    }, 350);
+  };
 
-  handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      if (this.state.isArticleVisible) {
-        this.handleCloseArticle();
+  const handleClickOutside = event => {
+    if (wrapperRef && !wrapperRef.contains(event.target)) {
+      if (state.isArticleVisible) {
+        handleCloseArticle();
       }
     }
-  }
+  };
 
-  render() {
-    return (
-      <Layout location={this.props.location}>
-        <div className={`body ${this.state.loading} ${this.state.isArticleVisible ? 'is-article-visible' : ''}`}>
-          <div id="wrapper">
-            <Header onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
-            <Main
-              isArticleVisible={this.state.isArticleVisible}
-              timeout={this.state.timeout}
-              articleTimeout={this.state.articleTimeout}
-              article={this.state.article}
-              onCloseArticle={this.handleCloseArticle}
-              setWrapperRef={this.setWrapperRef}
-            />
-            <Footer timeout={this.state.timeout} />
-          </div>
-          <div id="bg"></div>
+  return (
+    <Layout location={props.location}>
+      <div
+        className={`body ${state.loading} ${
+          state.isArticleVisible ? "is-article-visible" : ""
+        }`}>
+        <div id="wrapper">
+          <Header
+            onOpenArticle={key => {
+              handleOpenArticle(key);
+            }}
+            timeout={state.timeout}
+          />
+          <Main
+            isArticleVisible={state.isArticleVisible}
+            timeout={state.timeout}
+            articleTimeout={state.articleTimeout}
+            article={state.article}
+            onCloseArticle={handleCloseArticle}
+            setWrapperRef={setWrapperRef}
+          />
+          <Footer timeout={state.timeout} />
         </div>
-      </Layout>
-    )
-  }
+        <div id="bg"></div>
+      </div>
+    </Layout>
+  );
 }
 
-export default IndexPage
+export default IndexPage;

@@ -16,8 +16,6 @@ function Main(props) {
     }
   `);
 
-  console.log(images);
-
   const encode = data => {
     return Object.keys(data)
       .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
@@ -62,8 +60,7 @@ function Main(props) {
         id="intro"
         className={`${props.article === "intro" ? "active wide" : ""} ${
           props.articleTimeout ? "timeout" : ""
-        }`}
-        style={{ display: "none" }}>
+        }`}>
         <h2 className="major">About</h2>
         <div className="row">
           <div style={{ flex: 1 }}>
