@@ -48,6 +48,8 @@ function Main(props) {
 
   let close = (
     <div
+			role="button"
+			tabIndex="-1"
       className="close"
       onClick={() => {
         props.onCloseArticle();
