@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "author": "Hunter Chang",
   "dependencies": {
-    "gatsby": "^2.19.5",
-    "gatsby-plugin-manifest": "^2.2.38",
+    "gatsby": "^2.21.24",
+    "gatsby-plugin-manifest": "^2.4.2",
     "gatsby-plugin-react-helmet": "^3.1.21",
     "gatsby-plugin-sass": "^2.1.27",
     "node-sass": "^4.13.1",
