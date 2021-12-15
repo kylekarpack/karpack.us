@@ -1,8 +1,9 @@
 {
-  "name": "gatsby-starter-dimension-v2",
-  "description": "Gatsby Starter - Dimension V2",
+  "name": "karpack.us",
+  "description": "Karpack's personal site",
   "version": "1.0.0",
-  "author": "Hunter Chang",
+  "author": "Karpack",
+  "private": true,
   "dependencies": {
     "gatsby": "^4.4.0",
     "gatsby-background-image": "^1.1.1",
@@ -20,7 +21,7 @@
     "snyk": "^1.667.0"
   },
   "keywords": [
-    "gatsby"
+    "karpack"
   ],
   "license": "MIT",
   "scripts": {
@@ -32,11 +33,11 @@
     "prepare": "yarn run snyk-protect"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "prettier": "^2.5.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/kylekarpack/karpack.us"
   },
   "snyk": true
 }
