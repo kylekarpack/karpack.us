@@ -1,5 +1,3 @@
-import { graphql, useStaticQuery } from "gatsby";
-// import BackgroundImage from "gatsby-background-image";
 import { StaticImage } from "gatsby-plugin-image";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
@@ -26,18 +24,6 @@ function IndexPage(props) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
-
-  const background = useStaticQuery(graphql`
-    query {
-      file(relativePath: { eq: "bg.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 1920, quality: 20) {
-            ...GatsbyImageSharpFluid_withWebp_noBase64
-          }
-        }
-      }
-    }
-  `);
 
   const setWrapperRef = (node) => {
     wrapperRef = node;
