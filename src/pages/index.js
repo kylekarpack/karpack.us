@@ -119,12 +119,7 @@ function IndexPage(props) {
           <Footer timeout={state.timeout} />
         </div>
         <div id="bg">
-          {/* <BackgroundImage
-						id="main-bg"
-            fluid={background.file?.childImageSharp?.fluid}
-            backgroundColor={`#040e18`}
-          /> */}
-          <StaticImage src="../images/bg.jpg" />
+          <StaticImage src="../images/bg.jpg" alt="Background image" layout="fullWidth" style={{height: "100vh"}} />
         </div>
       </div>
     </Layout>

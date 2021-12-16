@@ -1,24 +1,9 @@
 import { graphql, useStaticQuery } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { StaticImage } from "gatsby-plugin-image";
 import React, { useState } from "react";
 
 function Main(props) {
   const [state, setState] = useState({});
-
-  const images = useStaticQuery(graphql`
-    query {
-      kristin: file(relativePath: { eq: "kristin.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: FIXED)
-        }
-      }
-      kyle: file(relativePath: { eq: "kyle.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: FIXED)
-        }
-      }
-    }
-  `);
 
   const encode = data => {
     return Object.keys(data)
@@ -74,13 +59,7 @@ function Main(props) {
         <div className="row">
           <div style={{ flex: 1 }}>
             <span className="image main">
-              <GatsbyImage
-                sizes={{
-                  ...images.kyle?.childImageSharp?.gatsbyImageData,
-                  aspectRatio: 3 / 1,
-                }}
-                alt="Kyle"
-              />
+              <StaticImage placeholder="blurred" width="400" src="../images/kyle.jpg" alt="Kyle" style={{width: "100%"}} />
             </span>
             <h3>Kyle Karpack</h3>
             <h4>Front End Engineer</h4>
@@ -95,13 +74,7 @@ function Main(props) {
           </div>
           <div style={{ flex: 1 }}>
             <span className="image main">
-              <GatsbyImage
-                sizes={{
-                  ...images.kristin?.childImageSharp?.gatsbyImageData,
-                  aspectRatio: 3 / 1,
-                }}
-                alt="Kristin"
-              />
+              <StaticImage placeholder="blurred" width="400" src="../images/kristin.jpg" alt="Kristin" style={{width: "100%"}} />
             </span>
             <h3>Kristin Karpack</h3>
             <h4>Mobile Engineer</h4>
@@ -198,13 +171,5 @@ function Main(props) {
     </div>
   );
 }
-
-export const imageFragment = graphql`
-  fragment ProfileImage on File {
-    childImageSharp {
-      gatsbyImageData(layout: FIXED)
-    }
-  }
-`;
 
 export default Main;
