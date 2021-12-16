@@ -5,20 +5,22 @@ import React, { useState } from "react";
 function Main(props) {
   const [state, setState] = useState({});
 
-  const encode = data => {
+  const encode = (data) => {
     return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
       .join("&");
   };
 
-  const handleChange = e => {
-		setState({ 
-			...state, 
-			[e.target.name]: e.target.value 
-		});
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target,
       data = encode({
@@ -32,34 +34,43 @@ function Main(props) {
       body: data,
     })
       .then(() => setState({ submitted: true }))
-      .catch(error => alert(error));
+      .catch((error) => alert(error));
   };
 
   let close = (
     <div
-			role="button"
-			tabIndex="-1"
+      role="button"
+      tabIndex="-1"
       className="close"
       onClick={() => {
         props.onCloseArticle();
-      }}></div>
+      }}
+    ></div>
   );
 
   return (
     <div
       ref={props.setWrapperRef}
       id="main"
-      style={props.timeout ? { display: "flex" } : { display: "none" }}>
+      style={props.timeout ? { display: "flex" } : { display: "none" }}
+    >
       <article
         id="intro"
         className={`${props.article === "intro" ? "active wide" : ""} ${
           props.articleTimeout ? "timeout" : ""
-        }`}>
+        }`}
+      >
         <h2 className="major">About</h2>
         <div className="row">
           <div style={{ flex: 1 }}>
             <span className="image main">
-              <StaticImage placeholder="blurred" width="400" src="../images/kyle.jpg" alt="Kyle" style={{width: "100%"}} />
+              <StaticImage
+                placeholder="blurred"
+                width="400"
+                src="../images/kyle.jpg"
+                alt="Kyle"
+                style={{ width: "100%" }}
+              />
             </span>
             <h3>Kyle Karpack</h3>
             <h4>Front End Engineer</h4>
@@ -74,7 +85,13 @@ function Main(props) {
           </div>
           <div style={{ flex: 1 }}>
             <span className="image main">
-              <StaticImage placeholder="blurred" width="400" src="../images/kristin.jpg" alt="Kristin" style={{width: "100%"}} />
+              <StaticImage
+                placeholder="blurred"
+                width="400"
+                src="../images/kristin.jpg"
+                alt="Kristin"
+                style={{ width: "100%" }}
+              />
             </span>
             <h3>Kristin Karpack</h3>
             <h4>Mobile Engineer</h4>
@@ -94,7 +111,8 @@ function Main(props) {
         className={`${props.article === "contact" ? "active" : ""} ${
           props.articleTimeout ? "timeout" : ""
         }`}
-        style={{ display: "none" }}>
+        style={{ display: "none" }}
+      >
         <h2 className="major">Contact</h2>
         <form
           name="contact"
@@ -102,7 +120,8 @@ function Main(props) {
           data-netlify
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
-          hidden={state.submitted}>
+          hidden={state.submitted}
+        >
           <div className="field half first">
             <label htmlFor="name">Name</label>
             <input type="text" name="name" id="name" onChange={handleChange} />
@@ -124,7 +143,8 @@ function Main(props) {
               id="message"
               rows="4"
               required
-              onChange={handleChange}></textarea>
+              onChange={handleChange}
+            ></textarea>
           </div>
           <ul className="actions">
             <li>
@@ -145,7 +165,8 @@ function Main(props) {
           <li>
             <a
               href="https://www.linkedin.com/in/kylekarpack/"
-              className="icon fa-linkedin">
+              className="icon fa-linkedin"
+            >
               <span className="label">Kyle on LinkedIn</span>
             </a>
           </li>
@@ -161,7 +182,8 @@ function Main(props) {
           <li>
             <a
               href="https://www.linkedin.com/in/kristinkarpack/"
-              className="icon fa-linkedin">
+              className="icon fa-linkedin"
+            >
               <span className="label">Kristin on LinkedIn</span>
             </a>
           </li>

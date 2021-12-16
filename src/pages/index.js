@@ -39,26 +39,26 @@ function IndexPage(props) {
     }
   `);
 
-  const setWrapperRef = node => {
+  const setWrapperRef = (node) => {
     wrapperRef = node;
   };
 
-  const handleOpenArticle = article => {
-    setState(stateRef => ({
+  const handleOpenArticle = (article) => {
+    setState((stateRef) => ({
       ...stateRef,
       isArticleVisible: true,
       article,
     }));
 
     setTimeout(() => {
-      setState(stateRef => ({
+      setState((stateRef) => ({
         ...stateRef,
         timeout: !stateRef.timeout,
       }));
     }, 325);
 
     setTimeout(() => {
-      setState(stateRef => ({
+      setState((stateRef) => ({
         ...stateRef,
         articleTimeout: !stateRef.articleTimeout,
       }));
@@ -66,20 +66,20 @@ function IndexPage(props) {
   };
 
   const handleCloseArticle = () => {
-    setState(stateRef => ({
+    setState((stateRef) => ({
       ...stateRef,
       articleTimeout: !stateRef.articleTimeout,
     }));
 
     setTimeout(() => {
-      setState(stateRef => ({
+      setState((stateRef) => ({
         ...stateRef,
         timeout: !stateRef.timeout,
       }));
     }, 325);
 
     setTimeout(() => {
-      setState(stateRef => ({
+      setState((stateRef) => ({
         ...stateRef,
         isArticleVisible: !stateRef.isArticleVisible,
         article: "",
@@ -87,7 +87,7 @@ function IndexPage(props) {
     }, 350);
   };
 
-  const handleClickOutside = event => {
+  const handleClickOutside = (event) => {
     if (wrapperRef && !wrapperRef.contains(event.target)) {
       if (state.isArticleVisible) {
         handleCloseArticle();
@@ -100,10 +100,11 @@ function IndexPage(props) {
       <div
         className={`body ${state.loading} ${
           state.isArticleVisible ? "is-article-visible" : ""
-        }`}>
+        }`}
+      >
         <div id="wrapper">
           <Header
-            onOpenArticle={key => {
+            onOpenArticle={(key) => {
               handleOpenArticle(key);
             }}
             timeout={state.timeout}
@@ -119,7 +120,12 @@ function IndexPage(props) {
           <Footer timeout={state.timeout} />
         </div>
         <div id="bg">
-          <StaticImage src="../images/bg.jpg" alt="Background image" layout="fullWidth" style={{height: "100vh"}} />
+          <StaticImage
+            src="../images/bg.jpg"
+            alt="Background image"
+            layout="fullWidth"
+            style={{ height: "100vh" }}
+          />
         </div>
       </div>
     </Layout>
