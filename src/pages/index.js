@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
-import BackgroundImage from "gatsby-background-image";
+// import BackgroundImage from "gatsby-background-image";
+import { StaticImage } from "gatsby-plugin-image";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -118,11 +119,12 @@ function IndexPage(props) {
           <Footer timeout={state.timeout} />
         </div>
         <div id="bg">
-          <BackgroundImage
+          {/* <BackgroundImage
 						id="main-bg"
             fluid={background.file?.childImageSharp?.fluid}
             backgroundColor={`#040e18`}
-          />
+          /> */}
+          <StaticImage src="../images/bg.jpg" />
         </div>
       </div>
     </Layout>

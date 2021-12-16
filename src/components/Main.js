@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import React, { useState } from "react";
 
 function Main(props) {
@@ -8,10 +8,14 @@ function Main(props) {
   const images = useStaticQuery(graphql`
     query {
       kristin: file(relativePath: { eq: "kristin.jpg" }) {
-        ...ProfileImage
+        childImageSharp {
+          gatsbyImageData(layout: FIXED)
+        }
       }
       kyle: file(relativePath: { eq: "kyle.jpg" }) {
-        ...ProfileImage
+        childImageSharp {
+          gatsbyImageData(layout: FIXED)
+        }
       }
     }
   `);
@@ -70,9 +74,9 @@ function Main(props) {
         <div className="row">
           <div style={{ flex: 1 }}>
             <span className="image main">
-              <Img
+              <GatsbyImage
                 sizes={{
-                  ...images.kyle?.childImageSharp?.fluid,
+                  ...images.kyle?.childImageSharp?.gatsbyImageData,
                   aspectRatio: 3 / 1,
                 }}
                 alt="Kyle"
@@ -91,9 +95,9 @@ function Main(props) {
           </div>
           <div style={{ flex: 1 }}>
             <span className="image main">
-              <Img
+              <GatsbyImage
                 sizes={{
-                  ...images.kristin?.childImageSharp?.fluid,
+                  ...images.kristin?.childImageSharp?.gatsbyImageData,
                   aspectRatio: 3 / 1,
                 }}
                 alt="Kristin"
@@ -198,9 +202,7 @@ function Main(props) {
 export const imageFragment = graphql`
   fragment ProfileImage on File {
     childImageSharp {
-      fluid(maxHeight: 150, quality: 50) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+      gatsbyImageData(layout: FIXED)
     }
   }
 `;
