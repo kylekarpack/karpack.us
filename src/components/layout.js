@@ -46,6 +46,7 @@ const Layout = ({ children, location }) => {
             ]}
           >
             <html lang="en" />
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9485426878039751" crossorigin="anonymous"></script>
           </Helmet>
           {content}
         </>
